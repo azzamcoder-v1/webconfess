@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confess Anonymous - Kirim Pesan</title>
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Selamat Datang di Confess Anonymous</h1>
+        <p class="welcome-text">Ungkapkan perasaanmu secara anonim dan kirim pesan confess ke temanmu dengan mudah dan aman.</p>
+        <form id="confessForm">
+            <label for="phoneNumber">Nomor WhatsApp (contoh: 6281234567890)</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Masukkan nomor WhatsApp" required pattern="62[0-9]{9,13}" />
+            
+            <label for="senderName">Nama Pengirim (opsional)</label>
+            <input type="text" id="senderName" name="senderName" placeholder="Masukkan nama pengirim" />
+            
+            <label for="message">Pesan</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tulis pesan confess Anda..." required></textarea>
+            
+            <button type="submit" id="sendBtn">Kirim ke WhatsApp</button>
+        </form>
+        <div id="responseMessage" class="message"></div>
+    </div>
+    <div class="floating-circle small"></div>
+    <div class="floating-circle medium"></div>
+    <div class="floating-circle large"></div>
+
+    
+
+    <script src="js/index.js"></script>
+</body>
+</html>

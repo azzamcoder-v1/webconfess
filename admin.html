@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - Confess Anonymous</title>
+    <style>
+        /* Reset and base */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f4f7fa;
+            color: #333;
+        }
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: white;
+            flex: 1 1 200px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #4a90e2;
+        }
+        .stat-card p {
+            margin: 0.5rem 0 0;
+            font-weight: 600;
+            color: #666;
+        }
+        #qrContainer {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        #qrCode {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            background: white;
+            display: inline-block;
+        }
+        .status {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #4a90e2;
+        }
+        .logs-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #222;
+        }
+        .log-entry {
+            margin-bottom: 0.3rem;
+        }
+        .log-entry.info {
+            color: #4a90e2;
+        }
+        .log-entry.success {
+            color: #27ae60;
+        }
+        .log-entry.error {
+            color: #e74c3c;
+        }
+        .buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            background: #4a90e2;
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #357ABD;
+        }
+        button:disabled {
+            background: #a0c4f7;
+            cursor: not-allowed;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+        @media (max-width: 600px) {
+            .stats {
+                flex-direction: column;
+            }
+            .stat-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel - Confess Anonymous</h1>
+        <div id="uptime">Uptime: 0h 0m</div>
+    </header>
+    <main>
+        <div class="status">
+            <div id="statusIndicator" style="display:inline-block; width:16px; height:16px; border-radius:50%; background:#4a90e2; margin-right:8px; vertical-align:middle;"></div>
+            <div id="statusText" style="display:inline-block; vertical-align:middle;">Status: Menghubungkan...</div>
+        </div>
+        <div id="qrContainer">
+            <img id="qrCode" src="" alt="QR Code" />
+        </div>
+        <div class="stats">
+            <div class="stat-card">
+                <h2 id="totalMessages">0</h2>
+                <p>Total Pesan</p>
+            </div>
+            <div class="stat-card">
+                <h2 id="todayMessages">0</h2>
+                <p>Pesan Hari Ini</p>
+            </div>
+            <div class="stat-card">
+                <h2 id="activeUsers">0</h2>
+                <p>Pengguna Aktif</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="refreshBtn">Refresh Status</button>
+            <button id="restartBtn">Restart Bot</button>
+            <button id="clearLogsBtn">Clear Logs</button>
+            <button id="exportBtn">Export Logs</button>
+        </div>
+        <div class="logs-container" id="logsContainer"></div>
+    </main>
+    <footer>
+        &copy; 2024 Confess Anonymous. All rights reserved.
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
